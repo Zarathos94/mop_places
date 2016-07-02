@@ -6,7 +6,9 @@
 var mopApp = angular.module('mopPlaces', [
     'ngAnimate',
     'ngCookies',
-    'ngSanitize'
+    'ngSanitize',
+    'ngRoute',
+    'ngMap'
 ]);
 
 mopApp.constant('APP_CONFIG', {

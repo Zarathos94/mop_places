@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html  ng-app="mopPlaces">
   <head>
     <title><%= title %></title>
-    <link rel="stylesheet" href="/components/material-design-lite/material.min.css">
-    <script src="/components/material-design-lite/material.min.js"></script>
+    <link rel="stylesheet" href="/css/dist/vendor.css">
+    <link rel="stylesheet" href="/css/dist/style.css">
+    <script src="/javascripts/dist/app_deps.js"></script>
+    <script src="/javascripts/dist/app_bundle.js"></script>
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   </head>
-  <body>
+  <body ng-controller="indexController">
     <% include partials/navigation.ejs %>
-    <% include partials/map.ejs %>
-    <% include partials/controls.ejs %>
+
   </body>
 </html>
