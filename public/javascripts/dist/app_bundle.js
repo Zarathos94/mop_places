@@ -27,9 +27,9 @@ mopApp.config(['$compileProvider', function($compileProvider) {
         $scope.clubList = [];
         $scope.barList = [];
         $scope.foodList = [];
+        $scope.allList = [];
+        
 
-        
-        
         $scope.getFood = function() {
             RESTService.request('http://localhost:3000/food', 'GET').then(function (response) {
                 if(response.status == 200) {
@@ -72,6 +72,39 @@ mopApp.config(['$compileProvider', function($compileProvider) {
 
             });
         };
+
+        $scope.getAll = function() {
+            RESTService.request('http://localhost:3000/clubs', 'GET').then(function (clubs) {
+                if(clubs.status == 200) {
+                    RESTService.request('http://localhost:3000/bars', 'GET').then(function (bars) {
+                        if(bars.status == 200) {
+                            RESTService.request('http://localhost:3000/food', 'GET').then(function (food) {
+                                if(food.status == 200) {
+                                    $scope.allList = food.data.foodList.concat(bars.data.barList.concat(clubs.data.clubList));
+                                    
+                                    $rootScope.$broadcast('foodList', $scope.allList);
+                                }
+                                else {
+
+                                }
+                            }, function (err) {
+
+                            });
+                        }
+                        else {
+
+                        }
+                    }, function (err) {
+
+                    });
+                }
+                else {
+
+                }
+            }, function (err) {
+
+            });
+        };
         
         $scope.locate = function(lat, lon) {
             $rootScope.$broadcast('locate', {lat: lat, lon: lon});
@@ -88,8 +121,8 @@ mopApp.config(['$compileProvider', function($compileProvider) {
         $scope.zoom = 10;
         
         NgMap.getMap().then(function(map) {
-            //console.log(map.getCenter());
-            map.center = "43.8563, 18.4131";
+            console.log(map.getCenter());
+            //map.center = "43.8563, 18.4131";
             console.log('markers', map.markers);
             console.log('shapes', map.shapes);
             
@@ -98,7 +131,7 @@ mopApp.config(['$compileProvider', function($compileProvider) {
         $scope.$on('clubList', function(event, args) {
             
             if(event.name == 'clubList') {
-                $scope.clubList = args;
+                $scope.showList = args;
                 
             }
         });
@@ -106,7 +139,7 @@ mopApp.config(['$compileProvider', function($compileProvider) {
         $scope.$on('foodList', function(event, args) {
 
             if(event.name == 'foodList') {
-                $scope.foodList = args;
+                $scope.showList = args;
 
             }
         });
@@ -114,13 +147,14 @@ mopApp.config(['$compileProvider', function($compileProvider) {
         $scope.$on('barList', function(event, args) {
 
             if(event.name == 'barList') {
-                $scope.barList = args;
+                $scope.showList = args;
 
             }
         });
         
         $scope.$on('locate', function(event, args) {
             if(event.name == 'locate') {
+                console.log(args);
                 $scope.centerCoords = {
                     lat: args.lat,
                     lon: args.lon
@@ -128,7 +162,7 @@ mopApp.config(['$compileProvider', function($compileProvider) {
                 $scope.zoom = 18;
                 
             }
-        })
+        });
     }]);
 
 })();

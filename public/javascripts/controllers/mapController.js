@@ -8,8 +8,8 @@
         $scope.zoom = 10;
         
         NgMap.getMap().then(function(map) {
-            //console.log(map.getCenter());
-            map.center = "43.8563, 18.4131";
+            console.log(map.getCenter());
+            //map.center = "43.8563, 18.4131";
             console.log('markers', map.markers);
             console.log('shapes', map.shapes);
             
@@ -18,7 +18,7 @@
         $scope.$on('clubList', function(event, args) {
             
             if(event.name == 'clubList') {
-                $scope.clubList = args;
+                $scope.showList = args;
                 
             }
         });
@@ -26,7 +26,7 @@
         $scope.$on('foodList', function(event, args) {
 
             if(event.name == 'foodList') {
-                $scope.foodList = args;
+                $scope.showList = args;
 
             }
         });
@@ -34,13 +34,14 @@
         $scope.$on('barList', function(event, args) {
 
             if(event.name == 'barList') {
-                $scope.barList = args;
+                $scope.showList = args;
 
             }
         });
         
         $scope.$on('locate', function(event, args) {
             if(event.name == 'locate') {
+                console.log(args);
                 $scope.centerCoords = {
                     lat: args.lat,
                     lon: args.lon
@@ -48,7 +49,7 @@
                 $scope.zoom = 18;
                 
             }
-        })
+        });
     }]);
 
 })();

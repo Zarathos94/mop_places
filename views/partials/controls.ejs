@@ -1,24 +1,28 @@
 <div class="controls-view">
     <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
         <div class="mdl-tabs__tab-bar" ng-init="getFood()">
-            <a href="#food-panel" class="mdl-tabs__tab is-active" ng-click="getFood()">Food</a>
+
+            <a href="#food-panel" class="mdl-tabs__tab is-active" ng-click="getFood()">Food </a>
             <a href="#clubs-panel" class="mdl-tabs__tab" ng-click="getClubs()">Clubs</a>
             <a href="#bars-panel" class="mdl-tabs__tab" ng-click="getBars()">Bars</a>
+            <a href="#all-panel" class="mdl-tabs__tab" ng-click="getAll()">All</a>
         </div>
 
         <div class="mdl-tabs__panel is-active" id="food-panel">
-            <div class="mdl-grid card-container" ng-repeat="x in foodList | filter: searchQuery" ng-show="foodList.length > 0">
-                <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
+            <div class="mdl-grid card-container" >
+                <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone" ng-repeat="x in foodList | filter: searchQuery" ng-show="foodList.length > 0">
                     <div class="wide-card mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__title">
                             <h2 class="mdl-card__title-text" ng-bind="x.name"></h2>
                         </div>
+                        <div class="mdl-card__supporting_image"><img ng-src="/images/{{x.image}}"/></div>
                         <div class="mdl-card__supporting-text" ng-bind="x.description">
+                        </div>
+                        <div class="mdl-card__actions mdl-card--border" >
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="locate(x.lat, x.lon)" >Locate <i class="material-icons">gps_fixed</i></a>
 
                         </div>
-                        <div class="mdl-card__actions mdl-card--border">
-                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="locate(x.lat, x.lon)">Locate <i class="material-icons">gps_fixed</i></a>
-                        </div>
+
                         <div class="mdl-card__menu">
                             <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="material-icons">info</i></button>
                         </div>
@@ -29,12 +33,13 @@
         </div>
         <div class="mdl-tabs__panel" id="clubs-panel">
 
-            <div class="mdl-grid card-container" ng-repeat="x in clubList | filter: searchQuery" ng-show="clubList.length > 0">
-                <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
+            <div class="mdl-grid card-container" >
+                <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone" ng-repeat="x in clubList | filter: searchQuery" ng-show="clubList.length > 0">
                     <div class="wide-card mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__title">
                             <h2 class="mdl-card__title-text" ng-bind="x.name"></h2>
                         </div>
+                        <div class="mdl-card__supporting_image"><img ng-src="/images/{{x.image}}"/></div>
                         <div class="mdl-card__supporting-text" ng-bind="x.description">
 
                         </div>
@@ -49,12 +54,34 @@
             </div>
         </div>
         <div class="mdl-tabs__panel" id="bars-panel">
-            <div class="mdl-grid card-container" ng-repeat="x in barList | filter: searchQuery" ng-show="barList.length > 0">
-                <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
+            <div class="mdl-grid card-container">
+                <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone" ng-repeat="x in barList | filter: searchQuery" ng-show="barList.length > 0">
                     <div class="wide-card mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__title">
                             <h2 class="mdl-card__title-text" ng-bind="x.name"></h2>
                         </div>
+                        <div class="mdl-card__supporting_image"><img ng-src="/images/{{x.image}}"/></div>
+                        <div class="mdl-card__supporting-text" ng-bind="x.description">
+
+                        </div>
+                        <div class="mdl-card__actions mdl-card--border">
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="locate(x.lat, x.lon)">Locate <i class="material-icons">gps_fixed</i></a>
+                        </div>
+                        <div class="mdl-card__menu">
+                            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="material-icons">info</i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mdl-tabs__panel" id="all-panel">
+            <div class="mdl-grid card-container">
+                <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone" ng-repeat="x in allList | filter: searchQuery" ng-show="allList.length > 0">
+                    <div class="wide-card mdl-card mdl-shadow--2dp">
+                        <div class="mdl-card__title">
+                            <h2 class="mdl-card__title-text" ng-bind="x.name"></h2>
+                        </div>
+                        <div class="mdl-card__supporting_image"><img ng-src="/images/{{x.image}}"/></div>
                         <div class="mdl-card__supporting-text" ng-bind="x.description">
 
                         </div>

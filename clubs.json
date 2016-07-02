@@ -3,12 +3,14 @@
     "name": "Cinemas Sloga",
     "description": "Pruža ugodnu zabavu uz raznovrstan program: muzika uživo, klubski koncerti, tematske i salsa večeri, te muziku uz resident DJ-a. Na svega par stotina metara od Vječne vatre u ulici Mehmeda Spahe 20 u prepoznatljivom ambijentu nudimo vam odličnu atmosferu uz raznovrsna pića.",
     "lat": 43.8596972,
-    "lon": 18.4182717
+    "lon": 18.4182717,
+    "image" : "sloga.jpg"
   },
   {
     "name": "Coloseum Club",
     "description": "The entertainment center Coloseum opens its doors to everyone who likes relaxed gatherings, high-quality concerts, entertainment events and top meals from the whole world.",
     "lat": 43.855150,
-    "lon": 18.412898
+    "lon": 18.412898,
+    "image" : "sloga.jpg"
   }
 ]
