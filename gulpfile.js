@@ -72,6 +72,6 @@ gulp.task('clean', function () {
     del(['public/javascripts/dist', 'public/css/dist']);
 });
 
-gulp.task('default', ['compile_app', 'compile_dependencies', 'compile_css'], function() {
+gulp.task('default', ['clean', 'compile_app', 'compile_dependencies', 'compile_css'], function() {
 
 });

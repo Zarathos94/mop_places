@@ -9,12 +9,12 @@ var mopApp = angular.module('mopPlaces', [
     'ngSanitize'
 ]);
 
-chApp.constant('APP_CONFIG', {
+mopApp.constant('APP_CONFIG', {
     self: 'http://localhost'
 });
 
 ////Notifications Growl Config
-chApp.config(['$compileProvider', function($compileProvider) {
+mopApp.config(['$compileProvider', function($compileProvider) {
     
     $compileProvider.debugInfoEnabled(false);
 }]);
