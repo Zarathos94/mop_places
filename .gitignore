@@ -1,0 +1,9 @@
+
+**/.idea/tasks.xml
+node_modules/
+./node_modules
+.idea
+.project
+.settings/
+.DS_Store
+public/components
