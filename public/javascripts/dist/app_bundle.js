@@ -22,34 +22,114 @@ mopApp.config(['$compileProvider', function($compileProvider) {
 }]);
 (function () {
     'use strict';
-    mopApp.controller('indexController', ['$scope', 'RESTService', function ($scope, RESTService) {
+    mopApp.controller('indexController', ['$scope', 'RESTService', '$rootScope', function ($scope, RESTService, $rootScope) {
 
         $scope.clubList = [];
         $scope.barList = [];
         $scope.foodList = [];
 
-        RESTService.request('http://localhost:3000/clubs', 'GET').then(function (response) {
-            if(response.status == 200) {
-                $scope.clubList = response.data.clubList;
-            }
-            else {
-                
-            }
-        }, function (err) {
-            
-        });
+        
+        
+        $scope.getFood = function() {
+            RESTService.request('http://localhost:3000/food', 'GET').then(function (response) {
+                if(response.status == 200) {
+                    $scope.foodList = response.data.foodList;
+                    $rootScope.$broadcast('foodList', response.data.foodList);
+                }
+                else {
+
+                }
+            }, function (err) {
+
+            });
+        };
+        
+
+        $scope.getBars = function() {
+            RESTService.request('http://localhost:3000/bars', 'GET').then(function (response) {
+                if(response.status == 200) {
+                    $scope.barList = response.data.barList;
+                    $rootScope.$broadcast('barList', response.data.barList);
+                }
+                else {
+
+                }
+            }, function (err) {
+
+            });
+        };
+
+        $scope.getClubs = function() {
+            RESTService.request('http://localhost:3000/clubs', 'GET').then(function (response) {
+                if(response.status == 200) {
+                    $scope.clubList = response.data.clubList;
+                    $rootScope.$broadcast('clubList', response.data.clubList);
+                }
+                else {
+
+                }
+            }, function (err) {
+
+            });
+        };
+        
+        $scope.locate = function(lat, lon) {
+            $rootScope.$broadcast('locate', {lat: lat, lon: lon});
+        };
     }]);
 })();
 (function () {
     'use strict';
-    mopApp.controller('mapController', function(NgMap) {
+    mopApp.controller('mapController', ['$scope', 'NgMap', '$rootScope', function($scope, NgMap, $rootScope) {
+        $scope.centerCoords = {
+            lat: 43.8563,
+            lon: 18.4131
+        };
+        $scope.zoom = 10;
+        
         NgMap.getMap().then(function(map) {
-            console.log(map.getCenter());
+            //console.log(map.getCenter());
+            map.center = "43.8563, 18.4131";
             console.log('markers', map.markers);
             console.log('shapes', map.shapes);
             
         });
-    });
+
+        $scope.$on('clubList', function(event, args) {
+            
+            if(event.name == 'clubList') {
+                $scope.clubList = args;
+                
+            }
+        });
+
+        $scope.$on('foodList', function(event, args) {
+
+            if(event.name == 'foodList') {
+                $scope.foodList = args;
+
+            }
+        });
+
+        $scope.$on('barList', function(event, args) {
+
+            if(event.name == 'barList') {
+                $scope.barList = args;
+
+            }
+        });
+        
+        $scope.$on('locate', function(event, args) {
+            if(event.name == 'locate') {
+                $scope.centerCoords = {
+                    lat: args.lat,
+                    lon: args.lon
+                };
+                $scope.zoom = 18;
+                
+            }
+        })
+    }]);
 
 })();
 /**

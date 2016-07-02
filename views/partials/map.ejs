@@ -1,6 +1,29 @@
-<div class="google-map">
+<div class="google-map" ng-controller="mapController">
     <div map-lazy-load="https://maps.google.com/maps/api/js?key=<%= apiKey %>&libraries=geometry,places,visualization">
-        <ng-map center="43.8563, 18.4131" zoom="10" default-style="false"></ng-map>
+        <ng-map center="{{centerCoords.lat}},{{centerCoords.lon}}" zoom="{{zoom}}" default-style="false" single-info-window="true">
+
+            <marker ng-repeat="x in clubList | filter: searchQuery"  position="{{x.lat}},{{x.lon}}" ></marker>
+            <marker ng-repeat="x in barList | filter: searchQuery"  position="{{x.lat}},{{x.lon}}" ></marker>
+            <marker ng-repeat="x in foodList | filter: searchQuery"  position="{{x.lat}},{{x.lon}}" ></marker>
+            <!--<custom-marker ng-repeat="x in clubList" position="{{x.lat}},{{x.lon}}">-->
+                <!--<div>-->
+                    <!--<b ng-bind="x.name"></b>-->
+                <!--</div>-->
+            <!--</custom-marker>-->
+
+            <!--<custom-marker ng-repeat="x in barList" position="{{x.lat}},{{x.lon}}">-->
+                <!--<div>-->
+                    <!--<b ng-bind="x.name"></b>-->
+                <!--</div>-->
+            <!--</custom-marker>-->
+
+            <!--<custom-marker ng-repeat="x in foodList" position="{{x.lat}},{{x.lon}}">-->
+                <!--<div>-->
+                    <!--<b ng-bind="x.name"></b>-->
+                <!--</div>-->
+            <!--</custom-marker>-->
+
+        </ng-map>
     </div>
 </div>
 
