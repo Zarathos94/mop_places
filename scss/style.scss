@@ -27,9 +27,10 @@
 
 }
 .mdl-card__supporting_image {
+  display: flex;
   > img {
     height: 100px;
-    margin-left: 25%;
+    margin: auto;
   }
 
 }
